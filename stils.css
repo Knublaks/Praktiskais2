@@ -1,0 +1,8 @@
+
+body {background-color:#eee;}
+.atb_poga {}
+ol {width:600px;}
+li {
+	overflow: hidden; 
+	white-space: nowrap;
+}

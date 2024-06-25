@@ -1,0 +1,70 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="author" content="R">
+	<meta name="description" content="QUIZZ">
+	<meta name="keywords" content="QUIZZ">
+	<title>QUIZZ</title>
+	<link rel="stylesheet" type="text/css" href="stils.css?v=1">
+	<script src="jautajumi.js?v=1"></script>
+</head>
+<body>
+	<div><b>Punkti <a id='punkti'>0</a></b></div>
+	<ol id='jaut'></ol>
+	<button id='poga0' onclick='uz_sakumu()' hidden>Atgriezties uz sākumu</button>
+</body>
+<script>
+	var punkti=0;
+	var Pdispl=document.getElementById('punkti');
+	var Poga=document.getElementById('poga0');
+	var JAUT=document.getElementById('jaut');
+	for(i=0;i<jautajumi.length;i++) {
+		var JT=document.createElement('li');
+		JAUT.appendChild(JT);
+		JT.innerText=jautajumi[i][0];
+		JT.setAttribute('id','jtj'+i);
+		JT.setAttribute('name','jtj');
+		if(i>0) {
+			JT.style.display='none';
+		}
+		var JTO=document.createElement('ol');
+		JT.appendChild(JTO);
+		for(j=2;j<jautajumi[i].length;j++) {
+			var ATB=document.createElement('li');
+			JTO.appendChild(ATB);
+			//ATB.innerHTML=jautajumi[i][j];
+			var BT=document.createElement('a');
+			JTO.appendChild(BT);
+			BT.setAttribute('class','atb_poga');
+			BT.setAttribute('href','#');
+			BT.innerText=jautajumi[i][j];//'atbilde '+(j-1);
+			BT.setAttribute('onclick','iesniegt_atb('+i+','+(j-1)+')');
+		}
+	}
+	function iesniegt_atb(ai,aj) {
+		if(aj==jautajumi[ai][1]) {
+			pareiza(ai);
+			alert('Atbilde pareiza!');			
+		} else {
+			alert('Atbilde nepareiza!');
+		}
+		//alert('Iesniegta '+aj+' atbilde!');
+		document.getElementById('jtj'+ai).style.display='none';
+		if(ai<jautajumi.length-1) {
+			document.getElementById('jtj'+(ai+1)).style.display='block';
+		} else {
+			Poga.style.display='block';
+		}
+	}
+	function pareiza(ai) {
+		punkti++;
+		Pdispl.innerText=punkti;		
+	}
+	function uz_sakumu() {
+		Pdispl.innerText=0;
+		Poga.style.display='none';
+		document.getElementById('jtj0').style.display='block';
+	}
+
+</script>
+</html>
